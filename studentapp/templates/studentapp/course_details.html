@@ -1,0 +1,42 @@
+{% extends 'studentapp/base.html' %}
+
+{% block title %}Course Details{% endblock %}
+
+{% block content %}
+    <h1>Course Details</h1>
+    <table class="table mt-4">
+        <thead>
+        <tr>
+            <th>CourseID</th>
+            <th>CourseTitle</th>
+            <th>CourseName</th>
+            <th>CourseSectionCode</th>
+			<th>CourseDepartment</th>
+			<th>Instructor</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for course in courses %}
+            <tr>
+                <td>{{ course.CourseID }}</td>
+                <td>{{ course.CourseTitle }}</td>
+                <td>{{ course.CourseName }}</td>
+                <td>{{ course.CourseSectionCode }}</td>
+				<td>{{ course.CourseDepartment }}</td>
+				<td>{{ course.Instructor }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="mt-4">
+        {% if courses.has_previous %}
+            <a href="?page=1" class="btn btn-secondary">First</a>
+            <a href="?page={{ courses.previous_page_number }}" class="btn btn-secondary">Previous</a>
+        {% endif %}
+        <span class="mx-2">{{ courses.number }} of {{ courses.paginator.num_pages }}</span>
+        {% if courses.has_next %}
+            <a href="?page={{ courses.next_page_number }}" class="btn btn-secondary">Next</a>
+            <a href="?page={{ courses.paginator.num_pages }}" class="btn btn-secondary">Last</a>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'studentapp/base.html' %}
+
+{% block title %}Student Details{% endblock %}
+
+{% block content %}
+	<h1>Student Details</h1>
+	<div class="container">
+		<table class="table mt-4">
+			<thead>
+				<tr>
+					<th>StudentID</th>
+					<th>FirstName</th>
+					<th>LastName</th>
+					<th>Major</th>
+					<th>Year</th>
+					<th>GPA</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for row in data %}
+				<tr>
+					<td> {{row.StudentID}} </td>
+					<td> {{row.FirstName}} </td>
+					<td> {{row.LastName}} </td>
+					<td> {{row.Major}} </td>
+					<td> {{row.Year}} </td>
+					<td> {{row.GPA}} </td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+			
+		<div class="pagination">
+			<span class="step-links">
+			{% if data.has_previous %}
+					
+				<a href="?page=1">First</a>
+				<a href="?page={{ data.previous_page_number }}">Previous</a>
+						
+				{% endif %}
+				<span class="current">
+					Page {{ data.number }} of {{ data.paginator.num_pages }}
+				</span>
+					
+				{% if data.has_next %}
+					<a href="?page={{ data.next_page_number }}">Next</a>
+					<a href="?page={{ data.paginator.num_pages }}">Last</a>
+				{% endif %}
+			</span>
+		</div>
+	</div>
+{% endblock %}

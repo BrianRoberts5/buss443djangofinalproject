@@ -1,0 +1,30 @@
+{% extends 'studentapp/base.html' %}
+
+{% block title %}Student Enrollment{% endblock %}
+
+{% block content %}
+    <h1>Student Enrollment</h1>
+    {% if error_message %}
+        <div class="alert alert-danger">{{ error_message }}</div>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="student" class="form-label">Student:</label>
+			<select name="student" id="student" class="form-control">
+			{% for student in students %}
+				<option value="{{ student.id }}">{{ student.first_name }} {{ student.last_name }}</option>
+			{% endfor %}
+			</select>
+		</div>
+		<div class="mb-3">
+			<label for="course" class="form-label">Course:</label>
+			<select name="course" id="course" class="form-control">
+			{% for course in courses %}
+				<option value="{{ course.id }}">{{ course.name }}</option>
+			{% endfor %}
+			</select>
+		</div>
+		<button type="submit" class="btn btn-primary">Enroll</button>
+	</form>
+{% endblock %}
